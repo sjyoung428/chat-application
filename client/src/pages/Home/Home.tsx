@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Home 페이지
+ */
 const Home = () => {
   return <div>Home</div>;
 };

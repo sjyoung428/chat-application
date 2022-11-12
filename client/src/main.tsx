@@ -4,14 +4,17 @@ import App from "./App";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import ProtectRouter from "./components/ProtectRouter";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Layout>
-        <GlobalStyle />
-        <App />
-      </Layout>
+      <ProtectRouter>
+        <Layout>
+          <GlobalStyle />
+          <App />
+        </Layout>
+      </ProtectRouter>
     </BrowserRouter>
   </React.StrictMode>
 );

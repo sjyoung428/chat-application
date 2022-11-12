@@ -10,6 +10,10 @@ interface AuthFormState {
   nickname: string;
 }
 
+/**
+ * - AuthForm 컴포넌트
+ * - 닉네임을 설정하는 폼
+ */
 const AuthForm = () => {
   const { register, handleSubmit, reset } = useForm<AuthFormState>();
   const { setNickname: setLocalNickname } = useLocalAuthStore();
@@ -28,6 +32,9 @@ const AuthForm = () => {
   };
 
   const onClickAnonymous = () => {
+    /**
+     * localStorage에 nickname을 초기화하고 sessionStorage에 nickname을 저장한다.
+     */
     setLocalNickname("");
     setSessionNickname("익명");
     /**
