@@ -5,6 +5,7 @@ import { useSessionAuthStore } from "../../store/useSessionAuthStore";
 import { Button } from "../Atoms/Button/Button.style";
 import { TextField } from "../Atoms/TextField/TextField.style";
 import * as S from "./Header.style";
+import toast from "react-hot-toast";
 
 /**
  * Header 컴포넌트
@@ -22,6 +23,7 @@ const Header = () => {
   const onLogout = () => {
     setLocalNickname("");
     setSessionNickname("");
+    toast.success("로그아웃 되었습니다.");
   };
 
   return (

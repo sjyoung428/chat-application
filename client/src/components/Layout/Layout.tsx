@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import Header from "../Header/Header";
 import * as S from "./Layout.style";
 
@@ -14,6 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <Header />
       <S.Body>{children}</S.Body>
+      <Toaster />
     </>
   );
 };
