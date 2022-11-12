@@ -21,11 +21,6 @@ const ProtectRouter = ({ children }: ProtectRouterProps) => {
        * 로그인 상태가 아닐 때는 auth 페이지로 이동
        */
       navigate("/auth", { replace: true });
-    } else {
-      /**
-       * 로그인 상태일 때는 home 페이지로 이동
-       */
-      navigate("/");
     }
   }, [nickname, navigate]);
 
