@@ -1,5 +1,3 @@
-import React from "react";
-
 /**
  * Home 페이지
  */

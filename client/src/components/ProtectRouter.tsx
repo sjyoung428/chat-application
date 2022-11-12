@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { useLocalAuthStore } from "../store/useLocalAuthStore";
-import { useSessionAuthStore } from "../store/useSessionAuthStore";
 
 interface ProtectRouterProps {
   children: React.ReactNode;
@@ -13,8 +11,6 @@ interface ProtectRouterProps {
  */
 
 const ProtectRouter = ({ children }: ProtectRouterProps) => {
-  const { nickname: localNickname } = useLocalAuthStore();
-  const { nickname: sessionNickname } = useSessionAuthStore();
   const { nickname } = useAuth();
 
   const navigate = useNavigate();
