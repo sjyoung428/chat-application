@@ -1,18 +1,15 @@
-import React from "react";
 import { useMatch } from "react-router-dom";
-import { useLocalAuthStore } from "../../store/useLocalAuthStore";
-import { useSessionAuthStore } from "../../store/useSessionAuthStore";
 import { Button } from "../Atoms/Button/Button.style";
 import { TextField } from "../Atoms/TextField/TextField.style";
 import * as S from "./Header.style";
 import toast from "react-hot-toast";
+import { useAuth } from "../../hooks/useAuth";
 
 /**
  * Header 컴포넌트
  */
 const Header = () => {
-  const { setNickname: setLocalNickname } = useLocalAuthStore();
-  const { setNickname: setSessionNickname } = useSessionAuthStore();
+  const { setNickname } = useAuth();
 
   /**
    * 현재 url과 일치하는 path가 있는지 확인
@@ -21,8 +18,7 @@ const Header = () => {
   const isAuth = useMatch("/auth");
 
   const onLogout = () => {
-    setLocalNickname("");
-    setSessionNickname("");
+    setNickname("");
     toast.success("로그아웃 되었습니다.");
   };
 

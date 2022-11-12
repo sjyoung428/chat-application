@@ -1,11 +1,9 @@
-import React from "react";
 import { useForm } from "react-hook-form";
-import { useLocalAuthStore } from "../../store/useLocalAuthStore";
-import { useSessionAuthStore } from "../../store/useSessionAuthStore";
 import Button from "../Atoms/Button/Button";
 import TextInput from "../Atoms/Input/TextInput";
 import * as S from "./AuthForm.style";
 import toast from "react-hot-toast";
+import { useAuth } from "../../hooks/useAuth";
 
 interface AuthFormState {
   nickname: string;
@@ -17,8 +15,7 @@ interface AuthFormState {
  */
 const AuthForm = () => {
   const { register, handleSubmit, reset } = useForm<AuthFormState>();
-  const { setNickname: setLocalNickname } = useLocalAuthStore();
-  const { setNickname: setSessionNickname } = useSessionAuthStore();
+  const { setNickname } = useAuth();
 
   const onValid = ({ nickname }: AuthFormState) => {
     if (nickname === "") {
@@ -28,8 +25,7 @@ const AuthForm = () => {
     /**
      * localStorage에 nickname을 저장하고 sessionStorage에 nickname을 초기화한다.
      */
-    setLocalNickname(nickname);
-    setSessionNickname("");
+    setNickname(nickname);
     toast.success(`${nickname}님 환영합니다!`);
     /**
      * submit 이벤트 발생 시 input값 초기화
@@ -41,8 +37,7 @@ const AuthForm = () => {
     /**
      * localStorage에 nickname을 초기화하고 sessionStorage에 nickname을 저장한다.
      */
-    setLocalNickname("");
-    setSessionNickname("익명");
+    setNickname("익명");
     toast.success(`익명님 환영합니다!`);
     /**
      * 익명 로그인 시 input값 초기화
@@ -55,7 +50,7 @@ const AuthForm = () => {
       <S.AuthForm onSubmit={handleSubmit(onValid)}>
         <TextInput
           register={register("nickname", {
-            minLength: 2, // 닉네임은 최소 2글자 이상
+            minLength: 3, // 닉네임은 최소 2글자 이상
           })}
           placeholder="닉네임을 설정해주세요"
         />

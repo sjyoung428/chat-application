@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import { useLocalAuthStore } from "../store/useLocalAuthStore";
 import { useSessionAuthStore } from "../store/useSessionAuthStore";
 
@@ -14,11 +15,12 @@ interface ProtectRouterProps {
 const ProtectRouter = ({ children }: ProtectRouterProps) => {
   const { nickname: localNickname } = useLocalAuthStore();
   const { nickname: sessionNickname } = useSessionAuthStore();
+  const { nickname } = useAuth();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localNickname === "" && sessionNickname === "") {
+    if (nickname === "") {
       /**
        * 로그인 상태가 아닐 때는 auth 페이지로 이동
        */
@@ -29,7 +31,7 @@ const ProtectRouter = ({ children }: ProtectRouterProps) => {
        */
       navigate("/");
     }
-  }, [localNickname, sessionNickname, navigate]);
+  }, [nickname, navigate]);
 
   return <>{children}</>;
 };
