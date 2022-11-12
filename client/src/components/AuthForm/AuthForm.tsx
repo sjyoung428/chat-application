@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import Button from "../Atoms/Button/Button";
-import TextInput from "../Atoms/Input/TextInput";
+import TextInput from "../Atoms/TextInput/TextInput";
 import * as S from "./AuthForm.style";
 import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
