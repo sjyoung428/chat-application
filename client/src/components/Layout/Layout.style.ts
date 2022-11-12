@@ -5,4 +5,5 @@ export const Body = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
+  min-height: 90vh;
 `;
