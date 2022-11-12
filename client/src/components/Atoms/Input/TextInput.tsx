@@ -1,13 +1,16 @@
 import React from "react";
-import { StyledComponent } from "styled-components";
+import type { UseFormRegisterReturn } from "react-hook-form";
 import * as S from "./TextInput.style";
 
 interface InputProps {
   placeholder: string;
+  register: UseFormRegisterReturn;
 }
-
-const TextInput = ({ placeholder }: InputProps) => {
-  return <S.Input placeholder={placeholder} />;
+/**
+ * TextInput 컴포넌트
+ */
+const TextInput = ({ placeholder, register }: InputProps) => {
+  return <S.Input {...register} placeholder={placeholder} />;
 };
 
 export default TextInput;
