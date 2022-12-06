@@ -16,6 +16,8 @@ export const FloatButton = styled.button`
   svg {
     transform: rotate(45deg);
     color: #757575;
+    z-index: 999;
+    position: fixed;
   }
 
   &:hover {
