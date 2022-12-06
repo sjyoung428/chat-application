@@ -5,15 +5,18 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import ProtectRouter from "./components/ProtectRouter";
+import { NextUIProvider } from "@nextui-org/react";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ProtectRouter>
-        <Layout>
-          <GlobalStyle />
-          <App />
-        </Layout>
+        <NextUIProvider>
+          <Layout>
+            <GlobalStyle />
+            <App />
+          </Layout>
+        </NextUIProvider>
       </ProtectRouter>
     </BrowserRouter>
   </React.StrictMode>

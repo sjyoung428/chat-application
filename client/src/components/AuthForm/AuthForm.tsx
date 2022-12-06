@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Button } from "../Atoms/Button";
-import { TextInput } from "../Atoms/TextInput";
+import { Button } from "@nextui-org/react";
 import * as S from "./AuthForm.style";
 import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Spacer } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 
 interface AuthFormState {
   nickname: string;
@@ -66,23 +67,33 @@ const AuthForm = () => {
    */
   const onInValid = () => {
     const { nickname } = errors;
-    if (nickname) {
-      toast.error("3글자 이상 입력해주세요.");
+    if (nickname && nickname.message) {
+      toast.error(nickname.message);
     }
   };
 
   return (
     <S.AuthFormContainer>
       <S.AuthForm onSubmit={handleSubmit(onValid, onInValid)}>
-        <TextInput
-          register={register("nickname", {
-            minLength: 3, // 닉네임은 최소 2글자 이상
+        <Input
+          {...register("nickname", {
+            required: "닉네임을 입력해주세요.",
+            minLength: {
+              value: 3,
+              message: "3글자 이상 입력해주세요.",
+            },
           })}
-          placeholder="닉네임을 설정해주세요"
+          labelPlaceholder="닉네임"
         />
-        <Button>설정하기</Button>
+        <Spacer y={0.5} />
+        <Button type="submit" color="success">
+          설정하기
+        </Button>
       </S.AuthForm>
-      <Button onClick={onClickAnonymous}>익명으로 시작하기</Button>
+      <Spacer y={0.5} />
+      <Button color="success" onPress={onClickAnonymous}>
+        익명으로 시작하기
+      </Button>
     </S.AuthFormContainer>
   );
 };
