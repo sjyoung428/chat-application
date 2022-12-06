@@ -1,9 +1,9 @@
 import { useMatch } from "react-router-dom";
 import { Button } from "../Atoms/Button/Button.style";
-import { TextField } from "../Atoms/TextField/TextField.style";
 import * as S from "./Header.style";
 import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
+import { TextField } from "../Atoms/TextField";
 
 /**
  * Header 컴포넌트
