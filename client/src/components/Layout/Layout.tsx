@@ -15,7 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <Header />
       <S.Body>{children}</S.Body>
-      <Toaster />
+      <Toaster position="bottom-center" />
     </>
   );
 };
