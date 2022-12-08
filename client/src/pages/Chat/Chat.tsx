@@ -1,5 +1,8 @@
+import { useParams } from "react-router-dom";
+import ChatRoom from "../../components/ChatRoom/ChatRoom";
+
 const Chat = () => {
-  return <div>chat room</div>;
+  return <ChatRoom />;
 };
 
 export default Chat;

@@ -7,23 +7,12 @@ export const FloatButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f1f3f5;
+  border: none;
+  outline: none;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-
-  svg {
-    transform: rotate(45deg);
-    color: #757575;
-    z-index: 999;
-    position: fixed;
-  }
-
+  transition: all 0.2s ease-in-out;
   &:hover {
-    background-color: #e0e0e0;
-    svg {
-      color: #424242;
-    }
+    background-color: #e9ecef;
   }
 `;

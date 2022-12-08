@@ -1,4 +1,4 @@
-import { useMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import * as S from "./Header.style";
 import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
@@ -23,13 +23,32 @@ const Header = () => {
 
   return (
     <S.Header>
+      {!isAuth && !isHome && (
+        <Text
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            left: "1rem",
+            border: "none",
+            background: "none",
+            flexBasis: "auto",
+            color: "white",
+            fontSize: "1.5rem",
+            cursor: "pointer",
+          }}
+        >
+          <Link to="/">홈</Link>
+        </Text>
+      )}
       <Text h1 size="$2xl" color="white">
-        {(isHome && nickname) || (isAuth && "Auth")}
+        {(isHome && nickname) || (isAuth && "Auth") || "채팅방"}
       </Text>
       {/**
        * 로그인 상태일 때만 로그아웃 버튼을 보여준다.
        */}
-      {isHome ? (
+      {!isAuth ? (
         <Text
           onClick={onLogout}
           size="$sm"
