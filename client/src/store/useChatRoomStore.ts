@@ -4,11 +4,12 @@ import { persist } from "zustand/middleware";
 export type ChatRoom = {
   id: string;
   roomname: string;
+  user: number;
 };
 
 export interface ChatRoomStore {
   chatRoomList: ChatRoom[];
-  createChatRoom: (roomname: string) => void;
+  createChatRoom: (roomname: string, userId: number) => void;
   deleteChatRoom: (id: string) => void;
 }
 
@@ -21,13 +22,14 @@ export const useChatRoomStore = create<ChatRoomStore>()(
     // 채팅방 목록
     chatRoomList: [],
     // 채팅방 생성
-    createChatRoom: (roomname: string) => {
+    createChatRoom: (roomname: string, userId: number) => {
       set((state) => ({
         chatRoomList: [
           ...state.chatRoomList,
           {
             id: Date.now().toString(),
             roomname,
+            user: userId,
           },
         ],
       }));

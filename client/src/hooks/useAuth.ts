@@ -11,23 +11,28 @@ import { useSessionAuthStore } from "../store/useSessionAuthStore";
  */
 
 export const useAuth = () => {
-  const { nickname: localNickname, setNickname: setLocalNickname } =
-    useLocalAuthStore();
+  const {
+    user: localNickname,
+    setUser: setLocalNickname,
+    logout: setLocalLogout,
+  } = useLocalAuthStore();
   const { nickname: sessionNickname, setNickname: setSessionNickname } =
     useSessionAuthStore();
 
   return {
     nickname:
-      localNickname === "" && sessionNickname === ""
+      localNickname.nickname === "" && sessionNickname === ""
         ? ""
-        : localNickname || sessionNickname,
+        : localNickname.nickname || sessionNickname,
+
+    userId: localNickname.id || 0,
 
     setNickname: (nickname: string) => {
       if (nickname === "") {
         /**
          * 로그아웃 시에는 localStorage와 sessionStorage에 저장된 nickname을 삭제한다.
          */
-        setLocalNickname(nickname);
+        setLocalLogout();
         setSessionNickname(nickname);
         return;
       }
@@ -35,7 +40,7 @@ export const useAuth = () => {
         /**
          * 익명으로 로그인 시에는 sessionStorage에 nickname을 저장한다.
          */
-        setLocalNickname("");
+        setLocalLogout();
         setSessionNickname(nickname);
         return;
       }

@@ -1,12 +1,16 @@
 import React from "react";
-import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import { Modal, Button, Text, Input } from "@nextui-org/react";
 import { useModalStore } from "../../store/useModalStore";
 import { useForm } from "react-hook-form";
 import { ChatRoom, useChatRoomStore } from "../../store/useChatRoomStore";
+import toast from "react-hot-toast";
+import { useAuth } from "../../hooks/useAuth";
 
 const ChatModal = () => {
   const { isModalOpen, closeModal } = useModalStore();
   const { createChatRoom } = useChatRoomStore();
+  const { userId } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -15,12 +19,17 @@ const ChatModal = () => {
   } = useForm<Pick<ChatRoom, "roomname">>();
 
   const onValid = ({ roomname }: Pick<ChatRoom, "roomname">) => {
-    createChatRoom(roomname);
+    createChatRoom(roomname,userId);
     reset();
     closeModal();
   };
 
-  const onInValid = () => {};
+  const onInValid = () => {
+    const { roomname } = errors;
+    if (roomname && roomname.message) {
+      toast.error(roomname.message);
+    }
+  };
 
   return (
     <Modal open={isModalOpen} onClose={closeModal} closeButton>

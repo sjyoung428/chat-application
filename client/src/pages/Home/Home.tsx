@@ -1,13 +1,16 @@
 import { ChatList } from "../../components/ChatList";
 import { ChatModal } from "../../components/ChatModal";
 import { FloatButton } from "../../components/FloatButton/FloatButton.styles";
+import { useAuth } from "../../hooks/useAuth";
 import { useModalStore } from "../../store/useModalStore";
 
 /**
  * Home 페이지
  */
 const Home = () => {
+  const { userId } = useAuth();
   const { openModal } = useModalStore();
+
   const onCreateChatRoom = () => {
     openModal();
   };
@@ -16,7 +19,7 @@ const Home = () => {
     <>
       <ChatList />
       <ChatModal />
-      <FloatButton onClick={onCreateChatRoom} />
+      {userId !== 0 && <FloatButton onClick={onCreateChatRoom} />}
     </>
   );
 };

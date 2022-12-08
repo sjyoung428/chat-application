@@ -8,7 +8,7 @@ import { Text } from "@nextui-org/react";
  * Header 컴포넌트
  */
 const Header = () => {
-  const { setNickname } = useAuth();
+  const { nickname, setNickname } = useAuth();
 
   /**
    * 현재 url과 일치하는 path가 있는지 확인
@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <S.Header>
       <Text h1 size="$2xl" color="white">
-        {(isHome && "Home") || (isAuth && "Auth")}
+        {(isHome && nickname) || (isAuth && "Auth")}
       </Text>
       {/**
        * 로그인 상태일 때만 로그아웃 버튼을 보여준다.
