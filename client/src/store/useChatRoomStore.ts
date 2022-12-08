@@ -1,15 +1,16 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import { User } from "./useLocalAuthStore";
 
 export type ChatRoom = {
   id: string;
   roomname: string;
-  user: number;
+  user: User;
 };
 
 export interface ChatRoomStore {
   chatRoomList: ChatRoom[];
-  createChatRoom: (roomname: string, userId: number) => void;
+  createChatRoom: (roomname: string, userId: number, nickname: string) => void;
   deleteChatRoom: (id: string) => void;
 }
 
@@ -22,14 +23,17 @@ export const useChatRoomStore = create<ChatRoomStore>()(
     // 채팅방 목록
     chatRoomList: [],
     // 채팅방 생성
-    createChatRoom: (roomname: string, userId: number) => {
+    createChatRoom: (roomname: string, userId: number, nickname: string) => {
       set((state) => ({
         chatRoomList: [
           ...state.chatRoomList,
           {
             id: Date.now().toString(),
             roomname,
-            user: userId,
+            user: {
+              id: userId,
+              nickname,
+            },
           },
         ],
       }));
@@ -37,9 +41,7 @@ export const useChatRoomStore = create<ChatRoomStore>()(
     // 채팅방 삭제
     deleteChatRoom: (id: string) => {
       set((state) => ({
-        chatRoomList: state.chatRoomList.filter(
-          (chatRoom) => chatRoom.id !== id
-        ),
+        chatRoomList: state.chatRoomList.filter((room) => room.id !== id),
       }));
     },
   }))

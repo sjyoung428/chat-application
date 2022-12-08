@@ -9,7 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
 const ChatModal = () => {
   const { isModalOpen, closeModal } = useModalStore();
   const { createChatRoom } = useChatRoomStore();
-  const { userId } = useAuth();
+  const { userId, nickname } = useAuth();
 
   const {
     register,
@@ -19,7 +19,7 @@ const ChatModal = () => {
   } = useForm<Pick<ChatRoom, "roomname">>();
 
   const onValid = ({ roomname }: Pick<ChatRoom, "roomname">) => {
-    createChatRoom(roomname,userId);
+    createChatRoom(roomname, userId, nickname);
     reset();
     closeModal();
   };

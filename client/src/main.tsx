@@ -8,7 +8,7 @@ import ProtectRouter from "./components/ProtectRouter";
 import { NextUIProvider } from "@nextui-org/react";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <ProtectRouter>
         <NextUIProvider>
@@ -19,5 +19,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         </NextUIProvider>
       </ProtectRouter>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
 );
