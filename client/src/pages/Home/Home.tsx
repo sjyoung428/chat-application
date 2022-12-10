@@ -8,7 +8,7 @@ import { useModalStore } from "../../store/useModalStore";
  * Home 페이지
  */
 const Home = () => {
-  const { userId } = useAuth();
+  const { nickname } = useAuth();
   const { openModal } = useModalStore();
 
   const onCreateChatRoom = () => {
@@ -19,7 +19,7 @@ const Home = () => {
     <>
       <ChatList />
       <ChatModal />
-      {userId !== 0 && <FloatButton onClick={onCreateChatRoom} />}
+      {nickname.length > 2 && <FloatButton onClick={onCreateChatRoom} />}
     </>
   );
 };

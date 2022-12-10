@@ -25,9 +25,10 @@ const ChatRoom = () => {
       nickname: "",
       message: "",
       id: 0,
+      userId: 0,
     },
   ]);
-  const { nickname } = useAuth();
+  const { nickname, userId } = useAuth();
   const {
     register,
     handleSubmit,
@@ -36,20 +37,21 @@ const ChatRoom = () => {
   } = useForm<ChatFormState>();
 
   useLayoutEffect(() => {
-    socket.on("message", ({ nickname, message }) => {
+    socket.on("message", ({ nickname, message, userId }) => {
       setComments((prev) => [
         ...prev,
         {
           nickname,
           message,
           id: Date.now(),
+          userId,
         },
       ]);
     });
   }, []);
 
   const onValid = ({ comment }: ChatFormState) => {
-    socket.emit("message", { nickname, message: comment });
+    socket.emit("message", { nickname, message: comment, userId });
     reset();
   };
 
@@ -75,7 +77,7 @@ const ChatRoom = () => {
           //   {comment.nickname} : {comment.message}
           // </Text>
           <div key={comment.id}>
-            <ChatText isOwner={true}>
+            <ChatText isOwner={comment.userId === userId}>
               {comment.nickname} : {comment.message}
             </ChatText>
           </div>
