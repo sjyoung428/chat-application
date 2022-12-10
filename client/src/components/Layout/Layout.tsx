@@ -1,6 +1,6 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import Header from "../Header/Header";
+import { Header } from "../Header";
 import * as S from "./Layout.style";
 
 interface LayoutProps {
