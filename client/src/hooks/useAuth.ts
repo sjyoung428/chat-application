@@ -16,16 +16,16 @@ export const useAuth = () => {
     setUser: setLocalNickname,
     logout: setLocalLogout,
   } = useLocalAuthStore();
-  const { nickname: sessionNickname, setNickname: setSessionNickname } =
+  const { user: sessionNickname, setUser: setSessionNickname } =
     useSessionAuthStore();
 
   return {
     nickname:
-      localNickname.nickname === "" && sessionNickname === ""
+      localNickname.nickname === "" && sessionNickname.nickname === ""
         ? ""
-        : localNickname.nickname || sessionNickname,
+        : localNickname.nickname || sessionNickname.nickname,
 
-    userId: localNickname.id || 0,
+    userId: localNickname.id || sessionNickname.id,
 
     setNickname: (nickname: string) => {
       if (nickname === "") {

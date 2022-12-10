@@ -1,9 +1,11 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import { User } from "./useLocalAuthStore";
 
 export interface SessionAuthStore {
-  nickname: string;
-  setNickname: (nickname: string) => void;
+  user: User;
+  setUser: (nickname: string) => void;
+  logout: () => void;
 }
 
 /**
@@ -16,8 +18,26 @@ export const useSessionAuthStore = create<SessionAuthStore>()(
    */
   persist(
     (set) => ({
-      nickname: "익명",
-      setNickname: (nickname: string) => set({ nickname }),
+      user: {
+        id: 0,
+        nickname: "",
+      },
+      setUser: (nickname: string) => {
+        set((state) => ({
+          user: {
+            id: Date.now(),
+            nickname,
+          },
+        }));
+      },
+      logout: () => {
+        set((state) => ({
+          user: {
+            id: 0,
+            nickname: "",
+          },
+        }));
+      },
     }),
     {
       /**

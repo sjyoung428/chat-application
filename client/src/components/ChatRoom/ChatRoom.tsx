@@ -6,11 +6,12 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 import { useAuth } from "../../hooks/useAuth";
+import { ChatText } from "../ChatText";
 
 interface ChatFormState {
   comment: string;
@@ -34,7 +35,7 @@ const ChatRoom = () => {
     formState: { errors },
   } = useForm<ChatFormState>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     socket.on("message", ({ nickname, message }) => {
       setComments((prev) => [
         ...prev,
@@ -65,12 +66,19 @@ const ChatRoom = () => {
         style={{
           border: "1px solid black",
           height: "60vh",
+          padding: "1rem",
+          overflowY: "scroll",
         }}
       >
         {comments.map((comment) => (
-          <Text key={comment.id}>
-            {comment.nickname} : {comment.message}
-          </Text>
+          // <Text key={comment.id}>
+          //   {comment.nickname} : {comment.message}
+          // </Text>
+          <div key={comment.id}>
+            <ChatText isOwner={true}>
+              {comment.nickname} : {comment.message}
+            </ChatText>
+          </div>
         ))}
       </Card>
       <Spacer y={2} />
