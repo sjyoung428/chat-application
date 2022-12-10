@@ -19,6 +19,7 @@ const Home = () => {
     <>
       <ChatList />
       <ChatModal />
+      {/* 익명이 아닐 때만 방 생성 가능 */}
       {nickname.length > 2 && <FloatButton onClick={onCreateChatRoom} />}
     </>
   );

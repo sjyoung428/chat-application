@@ -73,9 +73,6 @@ const ChatRoom = () => {
         }}
       >
         {comments.map((comment) => (
-          // <Text key={comment.id}>
-          //   {comment.nickname} : {comment.message}
-          // </Text>
           <div key={comment.id}>
             <ChatText isOwner={comment.userId === userId}>
               {comment.nickname} : {comment.message}

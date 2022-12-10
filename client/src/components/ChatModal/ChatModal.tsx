@@ -22,7 +22,6 @@ const ChatModal = () => {
   } = useForm<Pick<ChatRoom, "roomname">>();
 
   const onValid = ({ roomname }: Pick<ChatRoom, "roomname">) => {
-    // createChatRoom(roomname, userId, nickname);
     socket.emit("enter_room", roomname, userId, nickname);
     reset();
     closeModal();

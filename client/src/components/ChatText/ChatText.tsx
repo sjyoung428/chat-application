@@ -9,6 +9,7 @@ interface ChatTextProps {
 const ChatText = ({ children, isOwner = false }: ChatTextProps) => {
   return (
     <>
+      {/* isOwner가 true일 때는 오른쪽 정렬, false일 때는 왼쪽 정렬 */}
       {isOwner ? (
         <Text color="primary" style={{ textAlign: "right" }}>
           {children}
