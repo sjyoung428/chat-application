@@ -10,4 +10,5 @@ const server = http.createServer(app);
 
 //웹소켓 서버 생성
 socket(server);
+
 server.listen(PORT, () => console.log(`app listening on port ${PORT}!`));

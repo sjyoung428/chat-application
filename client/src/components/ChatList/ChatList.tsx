@@ -1,24 +1,28 @@
-import React from "react";
-import {
-  Container,
-  Card,
-  Col,
-  Text,
-  Spacer,
-  Button,
-  Row,
-} from "@nextui-org/react";
+import React, { useEffect } from "react";
+import { Container, Card, Col, Text, Spacer, Row } from "@nextui-org/react";
 import { useChatRoomStore } from "../../store/useChatRoomStore";
 import CloseIcon from "../CloseIcon";
-import { useAuth } from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:8080");
 
 /**
  * 채팅방 목록을 보여주는 컴포넌트
  */
 const ChatList = () => {
-  const { chatRoomList, deleteChatRoom } = useChatRoomStore();
+  const { chatRoomList, deleteChatRoom, createChatRoom } = useChatRoomStore();
+
+  useEffect(() => {
+    socket.on("room_change", (rooms) => {
+      rooms.forEach(
+        (room: { roomname: string; userId: number; nickname: string }) => {
+          createChatRoom(room.roomname, room.userId, room.nickname);
+        }
+      );
+    });
+  }, []);
 
   return (
     <Container>

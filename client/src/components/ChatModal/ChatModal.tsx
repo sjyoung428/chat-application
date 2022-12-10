@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
 import { useModalStore } from "../../store/useModalStore";
 import { useForm } from "react-hook-form";
 import { ChatRoom, useChatRoomStore } from "../../store/useChatRoomStore";
 import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:8080");
 
 const ChatModal = () => {
   const { isModalOpen, closeModal } = useModalStore();
@@ -19,7 +22,8 @@ const ChatModal = () => {
   } = useForm<Pick<ChatRoom, "roomname">>();
 
   const onValid = ({ roomname }: Pick<ChatRoom, "roomname">) => {
-    createChatRoom(roomname, userId, nickname);
+    // createChatRoom(roomname, userId, nickname);
+    socket.emit("enter_room", roomname, userId, nickname);
     reset();
     closeModal();
   };

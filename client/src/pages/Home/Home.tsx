@@ -1,6 +1,6 @@
 import { ChatList } from "../../components/ChatList";
 import { ChatModal } from "../../components/ChatModal";
-import { FloatButton } from "../../components/FloatButton/FloatButton.styles";
+import { FloatButton } from "../../components/FloatButton";
 import { useAuth } from "../../hooks/useAuth";
 import { useModalStore } from "../../store/useModalStore";
 
