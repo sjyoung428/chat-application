@@ -8,6 +8,7 @@ function App() {
     <>
       <Routes>
         {/**
+         * 라우팅
          * / -> Home
          * /auth -> Auth
          * /:id -> Chat
